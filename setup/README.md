@@ -26,7 +26,14 @@
     If you don’t have it installed already, it will
     prompt you to install it.
 
-3. Create conda environment with the app (**on Windows**):  
+3. If on Windows install
+  [Build Tools for Visual Studio 2017](https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=BuildTools&rel=15)
+  from [visualstudio.com](https://www.visualstudio.com/downloads/).
+  Check Windows 8.1 SDK and Windows 10 SDK options.
+  Previous version:
+  [Microsoft Visual C++ Build Tools 2015](https://go.microsoft.com/fwlink/?LinkId=691126).
+
+4. Create conda environment with the app (**on Windows**):  
 
     - run `install.bat` in this folder.  
 
