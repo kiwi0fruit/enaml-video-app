@@ -31,8 +31,18 @@ set "this_script_dir=%~dp0"
 cd /d %this_script_dir%
 
 set PYTHONNOUSERSITE=1
-"%miniconda_dir%\Scripts\conda.exe" env create --file env_win.yaml
 
+set "env=enaml_video_app"
+set "conda=%miniconda_dir%\Scripts\conda.exe"
+set "activate=%miniconda_dir%\Scripts\activate.bat"
+set "pip=%miniconda_dir%\envs\%env%\Scripts\pip.exe"
+
+"%conda%" env create --file env_win.yml
+call "%activate%" %env%
+"%conda%" remove --force --yes pyqtgraph
+"%pip%" install git+https://github.com/pyqtgraph/pyqtgraph.git
+"%conda%" remove --force --yes qt pyqt sip
+"%pip%" install pyside2
 
 pause
 :exit

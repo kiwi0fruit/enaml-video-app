@@ -45,7 +45,18 @@ this_script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "${this_script_dir}"
 
 export PYTHONNOUSERSITE=1
-"${miniconda_dir}/$bin/conda" env create --file ./env_unix.yaml
+
+env=enaml_video_app
+conda="${miniconda_dir}/$bin/conda"
+activate="${miniconda_dir}/$bin/activate"
+pip="${miniconda_dir}/envs/$env/$bin/pip"
+
+"$conda" env create --file ./env_unix.yml
+source "$activate" $env
+"$conda" remove --force --yes pyqtgraph
+"$pip" install git+https://github.com/pyqtgraph/pyqtgraph.git
+"$conda" remove --force --yes qt pyqt sip
+"$pip" install pyside2
 
 # Do not specify custom -p/--prefix path
 # this might make shortcut creation fail.

@@ -1,10 +1,3 @@
-# App
-
-Imports `test` function, has `app` CLI executable
-that prints PATH to show that the app runs in the
-activated environment.
-
-
 # Build instructions
 
 * open terminal with activated environment,

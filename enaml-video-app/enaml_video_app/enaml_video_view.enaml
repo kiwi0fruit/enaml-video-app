@@ -1,0 +1,109 @@
+﻿# -*- coding: utf-8 -*-
+from enaml_video_view2 import *
+
+
+enamldef Main(MainWindow): window:
+    title = "Enaml Video"
+
+    # Auto start video playback:
+    attr autostart_trigger
+    autostart_trigger ::
+        model.start_capturing()
+        one_off_resize_timer.start()
+
+    # Resize video hack:
+    Timer: one_off_resize_timer:
+        interval = 200
+        timeout ::
+            w, h = window.size()
+            # Change size of the main window together with a size of the video:
+            window.set_size((w, h + 1))
+            self.stop()
+
+    MenuBar:
+        Menu:
+            title = '&View'
+            Action:
+                text = 'Set original video size\tAlt+O'
+                triggered ::
+                    video.h_min = video.original_size[1]
+                    video.h_max = video.h_min
+            Action:
+                text = 'Set floating video size\tAlt+F'
+                triggered ::
+                    video.h_min = 240
+                    video.h_max = 1080
+            Action:
+                text = 'Print video info to console'
+                triggered ::
+                    print('Video Size:', video.size)
+                    print('Original Video Size:', video.original_size)
+                    print('Captured frames:', len(model.captured_frames))
+                    print('Edited frames:', len(model.edited_frames))
+            Action:
+                text = "Test Old Enaml Bugs (αβγ Unicode & Message box)"
+                triggered ::
+                    information(
+                        self,
+                        "Testing (αβγ)",
+                        ("If you see this then presumably PySide-Enaml bug was patched.\n" +
+                         "But it still can be broken if Python hangs after pressing OK.")
+                    )
+    Container:
+        constraints << [
+            # vbox(video, leak, plot),
+            vbox(video, plot),
+            # dynamic video size:
+            video.height >= video.h_min,
+            video.height <= video.h_max,
+            video.width == video.w,
+            # plot:
+            plot.height == 150,
+            plot.right == video.right,
+            plot.left == video.left,
+            # left container:
+            left_cont.width == 100,
+            left_cont.right + 10 == video.left,
+            left_cont.top == video.top,
+            # needed to have a well constrained system:
+            contents_top == video.top,
+            contents_left == left_cont.left,
+            contents_right == video.right,
+            contents_bottom == plot.bottom
+        ]
+        Container: left_cont:
+            padding = (0, 0, 0, 0)
+            PushButton: stop_button:
+                text = 'Stop capturing'
+                clicked :: model.capturing = False
+            PushButton: button1:
+                text << 'Button #1'
+                clicked :: print("Hello! I'm a Button #1")
+        VideoWidget: video:
+            attr h_min = 240  # height constraints:
+            attr h_max = 1080  # h_min <= height <= h_max
+            attr w = 427  # width constraint: width == w
+            size ::
+                x, y = self.original_size
+                self.w = round(self.size[1] * x / y)
+            point :: model.y = self.point[1]
+        PlotWidget: plot:
+            pass
+
+    # Update video and plot:
+    attr after_update = False
+    initialized :: model.observe('update', on_update)
+    # https://enaml.readthedocs.io/en/latest/examples/ex_observe_model_signal.html
+    # https://github.com/enthought/enaml/issues/245
+
+    func on_update():
+        ret = model.frame_and_cut()
+        if not (ret is None):
+            frame, cut = ret
+            video.update(frame)
+            plot.update(cut)
+            # leak.update(frame)
+        elif not (self.after_update is True):
+            self.after_update = True
+        else:
+            print('Error: model.frame_and_cut() returned None.')
