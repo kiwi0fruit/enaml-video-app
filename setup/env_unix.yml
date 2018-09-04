@@ -13,7 +13,7 @@ dependencies:
   # - pywin32
   - opencv
   - cython
-- pip:
-  - shortcutter
-  - "./enaml-video-app-0.1.0.tar.gz"
-  - "./enaml-video-app-ready-0.1.0.tar.gz"
+  - pip:
+    - shortcutter
+    - "./enaml-video-app-0.1.0.tar.gz"
+    - "./enaml-video-app-ready-0.1.0.tar.gz"
