@@ -1,0 +1,53 @@
+#!/bin/bash
+miniconda_dir=~/miniconda3
+
+
+# Begin Miniconda path confirmation
+case "$(uname -s)" in
+    CYGWIN*)    bin="Scripts";;
+    MINGW*)     bin="Scripts";;
+    *)          bin="bin"
+esac
+
+function yes_or_no {
+    while true; do
+        echo ""
+        echo "Is Miniconda/Anaconda installed to \"${miniconda_dir}\"? (yes/no)"
+        read -p "Type 'y' or 'n': " yn
+        case $yn in
+            [Yy]*) return 0 ;;  
+            [Nn]*) return 1 ;;
+            *) echo "Please type 'y' or 'n' only" ;;
+        esac
+    done
+}
+
+conda="${miniconda_dir}/$bin/conda"
+while true; do
+    if [ -f "$conda" ]; then
+        yes_or_no && break
+    else
+        echo "\"$conda\" was not found!"
+    fi
+    echo ""
+    echo "Please type the path to Miniconda/Anaconda folder."
+    echo "(you can drag'n'drop or paste it right here)"
+    read -p "Type the path (or 'x' to exit): " miniconda_dir
+    conda="${miniconda_dir}/$bin/conda"
+    if [ "${miniconda_dir}" == "x" ]; then
+        return 0
+    fi
+done
+# End Miniconda path confirmation
+
+
+this_script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "${this_script_dir}"
+
+export PYTHONNOUSERSITE=1
+"${miniconda_dir}/$bin/conda" env create --file ./env_unix.yaml
+
+# Do not specify custom -p/--prefix path
+# this might make shortcut creation fail.
+# If you need so specify custim prefix
+# first add ${miniconda_dir}/bin to the PATH.
