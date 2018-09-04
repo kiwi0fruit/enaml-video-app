@@ -1,2 +1,5 @@
 @set "script_dir=%~dp0"
-@"%script_dir%python.exe" -m enaml_video_app
+@cd "%script_dir%"
+@cd ..
+@start "Enaml video app" /min ".\python.exe" -m enaml_video_app
+

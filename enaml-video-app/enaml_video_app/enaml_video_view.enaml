@@ -15,6 +15,7 @@ enamldef Main(MainWindow): window:
     Timer: one_off_resize_timer:
         interval = 200
         timeout ::
+            window.maximize()
             w, h = window.size()
             # Change size of the main window together with a size of the video:
             window.set_size((w, h + 1))
