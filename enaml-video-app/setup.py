@@ -17,9 +17,8 @@ setup(
     
     include_package_data=True,
 
-    entry_points={
-        'console_scripts': [
-            'enaml-video-app=enaml_video_app.enaml_video:main',
-        ],
-    },
+    scripts=[
+        'scripts/enaml-video-app.bat',
+        'scripts/enaml-video-app',
+    ],
 )

@@ -13,6 +13,11 @@ except ImportError as e:
 
 import enaml
 from enaml.qt.qt_application import QtApplication
+
+# Hack for `enaml.imports()` to make `python -m enaml_video_app` work:
+import enaml_video_app as app
+import inspect
+os.chdir(os.path.dirname(inspect.getfile(app)))
 with enaml.imports():
     # noinspection PyUnresolvedReferences
     from enaml_video_view import Main
