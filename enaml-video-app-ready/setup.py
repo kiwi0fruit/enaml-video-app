@@ -2,12 +2,12 @@ from setuptools import setup
 from setuptools.command.install import install
 
 LOG_FILE = 'enaml_video_app_install_error_log.txt'
-QT_CONF = """[Paths]
-Prefix = {0}
-Binaries = {0}
-Headers = {1}
-
-"""
+# QT_CONF = """[Paths]
+# Prefix = {0}
+# Binaries = {0}
+# Headers = {1}
+# 
+# """
 
 
 class PostInstallCommand(install):
@@ -32,16 +32,16 @@ class PostInstallCommand(install):
         sc.create_shortcut_to_env_terminal(menu=False)
 
         qt_conf = p.join(p.dirname(python_executable), 'qt.conf')
-        pyside_module = p.join(p.dirname(p.dirname(inspect.getfile(enaml_video_app))), 'PySide2')
-        pyside_include = p.join(pyside_module, 'include', 'PySide2')
+        # pyside_module = p.join(p.dirname(p.dirname(inspect.getfile(enaml_video_app))), 'PySide2')
+        # pyside_include = p.join(pyside_module, 'include', 'PySide2')
         try:
             os.remove(qt_conf)
         except Exception as e:
             print(e, file=error_log)
-        try:
-            print(QT_CONF.format(pyside_module, pyside_include), file=open(qt_conf, 'w', encoding="utf-8"))
-        except Exception as e:
-            print(e, file=error_log)
+        # try:
+        #     print(QT_CONF.format(pyside_module, pyside_include), file=open(qt_conf, 'w', encoding="utf-8"))
+        # except Exception as e:
+        #     print(e, file=error_log)
 
         print(error_log.getvalue(), file=open(p.join(p.expanduser('~'), LOG_FILE),
                                               'w', encoding="utf-8"))
