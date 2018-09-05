@@ -51,6 +51,7 @@ conda="${miniconda_dir}/$bin/conda"
 activate="${miniconda_dir}/$bin/activate"
 pip="${miniconda_dir}/envs/$env/$bin/pip"
 
+"$conda" conda config --remove channels conda-forge
 "$conda" env create --file ./env_unix.yml
 source "$activate" $env
 "$conda" remove --force --yes pyqtgraph
