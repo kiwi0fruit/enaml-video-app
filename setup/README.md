@@ -1,6 +1,6 @@
 # Installation
 
-0. Download video [Cosmos Laundromat](https://cloud.blender.org/p/cosmos-laundromat/),
+0. Download video [Cosmos Laundromat](https://cloud.blender.org/p/cosmos-laundromat/55f35f7f2beb3300960bb077),
    place it on the desktop and rename to `cosmos_laundromat.mp4`  
    (**OR** you can copy and rename any other `*.mp4` video)
 
