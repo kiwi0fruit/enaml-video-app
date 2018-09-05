@@ -37,7 +37,7 @@ set "conda=%miniconda_dir%\Scripts\conda.exe"
 set "activate=%miniconda_dir%\Scripts\activate.bat"
 set "pip=%miniconda_dir%\envs\%env%\Scripts\pip.exe"
 
-"%conda%" conda config --remove channels conda-forge
+"%conda%" config --remove channels conda-forge
 "%conda%" env create --file env_win.yml
 call "%activate%" %env%
 "%conda%" remove --force --yes pyqtgraph
