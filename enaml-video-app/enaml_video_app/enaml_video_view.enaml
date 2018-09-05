@@ -37,7 +37,7 @@ enamldef Main(MainWindow): window:
             Action:
                 text = 'Print video info to console'
                 triggered ::
-                    print('Video Size:', video.size)
+                    print('Video Size:', video.size2)
                     print('Original Video Size:', video.original_size)
                     print('Captured frames:', len(model.captured_frames))
                     print('Edited frames:', len(model.edited_frames))
@@ -52,7 +52,6 @@ enamldef Main(MainWindow): window:
                     )
     Container:
         constraints << [
-            # vbox(video, leak, plot),
             vbox(video, plot),
             # dynamic video size:
             video.height >= video.h_min,
@@ -84,9 +83,9 @@ enamldef Main(MainWindow): window:
             attr h_min = 240  # height constraints:
             attr h_max = 1080  # h_min <= height <= h_max
             attr w = 427  # width constraint: width == w
-            size ::
+            size2 ::
                 x, y = self.original_size
-                self.w = round(self.size[1] * x / y)
+                self.w = round(self.size2[1] * x / y)
             point :: model.y = self.point[1]
         PlotWidget: plot:
             pass
@@ -103,7 +102,6 @@ enamldef Main(MainWindow): window:
             frame, cut = ret
             video.update(frame)
             plot.update(cut)
-            # leak.update(frame)
         elif not (self.after_update is True):
             self.after_update = True
         else:
