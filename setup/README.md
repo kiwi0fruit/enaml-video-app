@@ -2,7 +2,8 @@
 
 0. Download video [Cosmos Laundromat](https://cloud.blender.org/p/cosmos-laundromat/),
    place it on the desktop (~\Desktop in case of Unix)
-   and rename to `cosmos_laundromat.mp4`
+   and rename to `cosmos_laundromat.mp4`  
+   (**OR** you can copy and rename any other `*.mp4` video)
 
 1. Install [Miniconda3](https://conda.io/miniconda.html)
   (this instruction is for Python 3.6). I suggest
@@ -26,14 +27,7 @@
     If you don’t have it installed already, it will
     prompt you to install it.
 
-3. If on Windows install
-  [Build Tools for Visual Studio 2017](https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=BuildTools&rel=15)
-  from [visualstudio.com](https://www.visualstudio.com/downloads/).
-  Check Windows 8.1 SDK and Windows 10 SDK options.
-  Previous version:
-  [Microsoft Visual C++ Build Tools 2015](https://go.microsoft.com/fwlink/?LinkId=691126).
-
-4. Create conda environment with the app (**on Windows**):  
+3. Create conda environment with the app (**on Windows**):  
 
     - run `install.bat` in this folder.  
 
@@ -43,7 +37,7 @@
       > drag'n'drop `install.bat` script into the cmd window,
       > press enter.
 
-5. Create conda environment with the app (**on Linux/macOS**):
+4. Create conda environment with the app (**on Linux/macOS**):
 
     - open this folder in terminal,
     - type `. ./install`,  
@@ -54,7 +48,7 @@
     - type dot (`.`), type space (` `),
     - drag'n'drop `install` script to the terminal, enter  
 
-6. If you need to uninstall environment - run terminal with
+5. If you need to uninstall environment - run terminal with
   activated root conda environment. Then type:
 
        conda env remove --name enaml_video_app
