@@ -1,5 +1,2 @@
-@set "script_dir=%~dp0"
-@cd "%script_dir%"
-@cd ..
-@start "Enaml video app" /min ".\python.exe" -m enaml_video_app
-
+@for %%F in ("%~dp0..") do set "pyexedir=%%~fxF"
+@start "Enaml video app" /min "%pyexedir%\python.exe" -m enaml_video_app
