@@ -1,4 +1,6 @@
 name: enaml_video_app
+channels:
+  - defaults
 dependencies:
   - python=3.6
   - pip>=10.0.1
