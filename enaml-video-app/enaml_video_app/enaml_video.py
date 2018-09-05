@@ -3,6 +3,7 @@ Enaml video application.
 https://github.com/kiwi0fruit/enaml-video-app
 """
 import os
+import cv2  # should be done before import PySide2 https://github.com/kiwi0fruit/enaml-video-app/issues/2
 try:
     pass
     import PySide2
