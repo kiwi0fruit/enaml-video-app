@@ -56,8 +56,8 @@ pip="${miniconda_dir}/envs/$env/$bin/pip"
 source "$activate" $env
 "$conda" remove --force --yes pyqtgraph
 "$pip" install git+https://github.com/pyqtgraph/pyqtgraph.git
-"$conda" remove --force --yes qt pyqt sip
-"$pip" install pyside2
+"$conda" remove --force --yes pyqt sip
+# "$pip" install pyside2
 
 # Do not specify custom -p/--prefix path
 # this might make shortcut creation fail.
