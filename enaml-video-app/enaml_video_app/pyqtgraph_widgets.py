@@ -48,7 +48,6 @@ class ImageWidget(pg.GraphicsView):
     mouse_pressed = Signal(int, int)
     resized = Signal(int, int)
 
-    # noinspection PyPep8Naming
     def mousePressEvent(self, event):
         # noinspection PyUnresolvedReferences
         self.mouse_pressed.emit(event.pos().x(), event.pos().y())
@@ -59,13 +58,11 @@ class ImageWidget(pg.GraphicsView):
         self.resized.emit(self.size().width(), self.size().height())
         super(ImageWidget, self).resizeEvent(event)
 
-# # used in PySide v1 with OpenGL
-# class ImageWidget(RawImageGLWidget):
-    # ...
 
+# class ImageWidget(RawImageGLWidget):  # used in PySide v1 with OpenGL
+    # ...
     # def resizeGL(self, width, height):
         # self.resized.emit(width, height)
-
     # def mousePressEvent(self, event):
         # ...
         # event.accept()  # if you do not accept the event, then no move/release events will be received
