@@ -2,4 +2,11 @@
 
 Easy to install cross-platform python desktop application that captures video via OpenCV and displays it via LGPL [PySide2 Qt 5.11](https://www.qt.io/qt-for-python) GUI composed with [Enaml](https://github.com/nucleic/enaml) and built with [PyAppShare](https://github.com/kiwi0fruit/pyappshare) cookbook.
 
-The video lags as it imitates processing each frame via generating random numbers.
+It's an example app that mixes:
+
+* OpenCV video processing,
+* PySide2 Qt 5.11 cross-platform GUI,
+* Writing desktop UI with Enaml that is neat and fast,
+* Easy distributing and installing the app via PyAppShare cookbook that uses Miniconda.
+
+(The video lags as it imitates processing each frame via generating random numbers.)
