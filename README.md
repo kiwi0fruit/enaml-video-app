@@ -1,6 +1,6 @@
 # Enaml video app
 
-Easy to install cross-platform python desktop application that captures video via OpenCV and displays it via LGPL [PySide2 Qt 5.11](https://www.qt.io/qt-for-python) GUI composed with [Enaml](https://github.com/nucleic/enaml) and built with [PyAppShare](https://github.com/kiwi0fruit/pyappshare) cookbook.
+Easy to install cross-platform python desktop application that captures video via OpenCV and displays it via LGPL [Qt for Python](https://www.qt.io/qt-for-python) (PySide2 Qt 5.11) GUI composed with [Enaml](https://github.com/nucleic/enaml) and built with [PyAppShare](https://github.com/kiwi0fruit/pyappshare) cookbook that uses [Miniconda](https://conda.io/docs/glossary.html#miniconda-glossary) ([download](https://conda.io/miniconda.html)).
 
 It's an example app that mixes:
 
