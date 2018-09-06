@@ -9,7 +9,7 @@ dependencies:
   #
   - enaml
   - pyqtgraph
-  - pyopengl
+  # - pyopengl
   - matplotlib
   #
   - pywin32
