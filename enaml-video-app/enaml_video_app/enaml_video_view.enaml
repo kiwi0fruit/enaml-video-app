@@ -17,7 +17,6 @@ enamldef Main(MainWindow): window:
         timeout ::
             window.maximize()
             w, h = window.size()
-            # Change size of the main window together with a size of the video:
             window.set_size((w, h + 1))
             self.stop()
 
@@ -27,18 +26,24 @@ enamldef Main(MainWindow): window:
             Action:
                 text = 'Set original video size\tAlt+O'
                 triggered ::
-                    video.h_min = video.original_size[1]
-                    video.h_max = video.h_min
+                    video.h_min = video.h
+                    video.h_max = video.h
+                    video.w_min = video.w
+                    video.w_max = video.w
             Action:
                 text = 'Set floating video size\tAlt+F'
                 triggered ::
                     video.h_min = 240
-                    video.h_max = 1080
+                    video.h_max = 240
+                    video.w_min = 427
+                    video.w_max = 427
+                    deferred_call(setattr, video, 'h_max', 1080)
+                    deferred_call(setattr, video, 'w_max', 1920)
             Action:
                 text = 'Print video info to console'
                 triggered ::
-                    print('Video Size:', video.size2)
-                    print('Original Video Size:', video.original_size)
+                    print('Original Video Size:', video.w, video.h)
+                    print('Constrs:', video.w_min, video.w_max, video.h_min, video.h_max)
                     print('Captured frames:', len(model.captured_frames))
                     print('Edited frames:', len(model.edited_frames))
             Action:
@@ -56,7 +61,8 @@ enamldef Main(MainWindow): window:
             # dynamic video size:
             video.height >= video.h_min,
             video.height <= video.h_max,
-            video.width == video.w,
+            video.width >= video.w_min,
+            video.width <= video.w_max,
             # plot:
             plot.height == 150,
             plot.right == video.right,
@@ -82,10 +88,10 @@ enamldef Main(MainWindow): window:
         VideoWidget: video:
             attr h_min = 240  # height constraints:
             attr h_max = 1080  # h_min <= height <= h_max
-            attr w = 427  # width constraint: width == w
-            size2 ::
-                x, y = self.original_size
-                self.w = round(self.size2[1] * x / y)
+            attr w_min = 427  # width constraints:
+            attr w_max = 1920  # w_min <= width <= w_max
+            # widget_size ::
+            #     self.widget_w = round(self.widget_size[1] * self.w / self.h)
             point :: model.y = self.point[1]
         PlotWidget: plot:
             pass

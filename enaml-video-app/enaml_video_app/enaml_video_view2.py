@@ -4,6 +4,7 @@
 from pyqtgraph_widgets import PlotWidget, VideoWidget
 from enaml.layout.geometry import Size
 from enaml.layout.api import vbox  # hbox, align
+from enaml.application import deferred_call
 # noinspection PyUnresolvedReferences
 from enaml.stdlib.message_box import information
 
