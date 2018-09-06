@@ -1,0 +1,1 @@
+Easy to install cross-platform python desktop app that gets video via OpenCV and displays it via LGPL Qt 5 for Python (PySide2) GUI composed with Enaml & distributed with PyAppShare (uses Miniconda)
