@@ -7,6 +7,6 @@ It's an example app that mixes:
 * OpenCV video processing,
 * PySide2 Qt 5.11 cross-platform GUI,
 * Writing desktop UI with Enaml that is neat and fast,
-* Easy distributing and installing the app via PyAppShare cookbook that uses Miniconda.
+* Cross-platform app easy to distribute and install made via PyAppShare cookbook that uses Miniconda.
 
 (The video lags as it imitates processing each frame via generating random numbers.)
