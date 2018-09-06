@@ -4,7 +4,7 @@
    place it on the desktop and rename to `cosmos_laundromat.mp4`  
    (**OR** you can copy and rename any other `*.mp4` video)
 
-2. Download this [`setup`](https://github.com/kiwi0fruit/enaml-video-app/tree/master/setup) folder.
+2. Download this [`setup`](./) folder.
 
 3. Install [Miniconda3](https://conda.io/miniconda.html)
   (this instruction is for Python 3.6). I suggest
