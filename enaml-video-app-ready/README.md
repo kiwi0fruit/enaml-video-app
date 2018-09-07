@@ -1,9 +1,8 @@
-# App-ready
+# app-ready
 
-Creates desktop shortcuts to app executable and app
-module folder via [shortcutter](https://github.com/kiwi0fruit/shortcutter).
+Creates desktop shortcuts to app executable and to terminal with activated environment via [shortcutter](https://github.com/kiwi0fruit/shortcutter).
 Logs shortcut creation errors to
-`~/app_install_error_log.txt`.
+`~/enaml_video_app_install_error_log.txt`.
 
 
 # Build instructions
