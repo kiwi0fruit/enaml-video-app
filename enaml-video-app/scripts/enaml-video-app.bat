@@ -1,2 +1,2 @@
 @for %%F in ("%~dp0..") do set "pyexedir=%%~fxF"
-@start "" "%pyexedir%\pythonw.exe" -m enaml_video_app
+@"%pyexedir%\python.exe" -m enaml_video_app
