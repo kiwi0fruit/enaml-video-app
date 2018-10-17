@@ -15,7 +15,7 @@ enamldef Main(MainWindow): window:
     Timer: one_off_resize_timer:
         interval = 200
         timeout ::
-            window.maximize()
+            # window.maximize()
             w, h = window.size()
             window.set_size((w, h + 1))
             self.stop()
