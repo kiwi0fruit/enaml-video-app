@@ -29,7 +29,7 @@ class PostInstallCommand(install):
 
         sc = ShortCutter(error_log=error_log)
         sc.create_desktop_shortcut('enaml-video-app')
-        sc.create_desktop_shortcut('enaml-video-app-exe')
+        sc.create_desktop_shortcut('enaml-video-appw')
         sc.create_shortcut_to_env_terminal(menu=False)
 
         qt_conf = p.join(p.dirname(python_executable), 'qt.conf')
@@ -38,7 +38,8 @@ class PostInstallCommand(install):
         try:
             os.remove(qt_conf)
         except Exception as e:
-            print(e, file=error_log)
+            if p.isfile(qt_conf):
+                print(e, file=error_log)
         # try:
         #     print(QT_CONF.format(pyside_module, pyside_include), file=open(qt_conf, 'w', encoding="utf-8"))
         # except Exception as e:

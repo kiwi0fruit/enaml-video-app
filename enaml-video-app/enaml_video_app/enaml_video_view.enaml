@@ -1,5 +1,5 @@
 ﻿# -*- coding: utf-8 -*-
-from enaml_video_view2 import *
+from .enaml_video_view2 import *
 
 
 enamldef Main(MainWindow): window:

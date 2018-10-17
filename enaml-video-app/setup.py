@@ -19,12 +19,11 @@ setup(
 
     entry_points={
         'console_scripts': [
-            'enaml-video-app-exe=enaml_video_app.enaml_video:main',
+            'enaml-video-app=enaml_video_app.enaml_video:main',
         ],
     },
 
     scripts=[
-        'scripts/enaml-video-app.bat',
-        'scripts/enaml-video-app',
+        'scripts/enaml-video-appw',
     ],
 )

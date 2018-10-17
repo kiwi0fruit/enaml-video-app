@@ -14,15 +14,9 @@ except ImportError as e:
 
 import enaml
 from enaml.qt.qt_application import QtApplication
-
-# `enaml.imports()` doesn't work with `entry_points={'console_scripts'...` (at setup.py)
-# hack change CWD to make at least `python -m enaml_video_app` work with Enaml:
-import enaml_video_app
-import inspect
-os.chdir(os.path.dirname(inspect.getfile(enaml_video_app)))
 with enaml.imports():
     # noinspection PyUnresolvedReferences
-    from enaml_video_view import Main
+    from .enaml_video_view import Main
 
 
 def main():
