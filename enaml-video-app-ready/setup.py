@@ -29,6 +29,7 @@ class PostInstallCommand(install):
 
         sc = ShortCutter(error_log=error_log)
         sc.create_desktop_shortcut('enaml-video-app')
+        sc.create_desktop_shortcut('enaml-video-app-exe')
         sc.create_shortcut_to_env_terminal(menu=False)
 
         qt_conf = p.join(p.dirname(python_executable), 'qt.conf')
