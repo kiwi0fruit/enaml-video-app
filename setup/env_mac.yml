@@ -1,0 +1,21 @@
+name: enaml_video_app
+channels:
+  - defaults
+dependencies:
+  - python=3.6
+  - pip>=10.0.1
+  - wheel
+  - setuptools
+  #
+  - enaml
+  - pyqtgraph
+  # - pyopengl
+  - matplotlib
+  - python.app
+  #
+  - opencv
+  - cython
+  - pip:
+    - shortcutter
+    - "./enaml-video-app-0.1.0.tar.gz"
+    - "./enaml-video-app-ready-0.1.0.tar.gz"

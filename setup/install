@@ -51,8 +51,13 @@ conda="${miniconda_dir}/$bin/conda"
 activate="${miniconda_dir}/$bin/activate"
 pip="${miniconda_dir}/envs/$env/$bin/pip"
 
+yaml="./env_unix.yml"
+if [ "$(uname)" == "Darwin" ]; then
+    yaml="./env_mac.yml"      
+fi
+
 "$conda" config --remove channels conda-forge
-"$conda" env create --file ./env_unix.yml
+"$conda" env create --file "$yaml"
 source "$activate" $env
 "$conda" remove --force --yes pyqtgraph
 "$pip" install git+https://github.com/pyqtgraph/pyqtgraph.git

@@ -1,2 +1,6 @@
 #!/bin/bash
-python -m enaml_video_app
+pyexe="python"
+if [ "$(uname)" == "Darwin" ]; then
+    pyexe="pythonw"      
+fi
+"$pyexe" -m enaml_video_app --main
