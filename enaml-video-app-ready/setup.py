@@ -32,7 +32,6 @@ class PostInstallCommand(install):
             sc.create_desktop_shortcut('enaml-video-appw')
         else:
             sc.create_desktop_shortcut('enaml-video-app')
-        sc.create_desktop_shortcut('enaml-video-appw')
         sc.create_shortcut_to_env_terminal(menu=False)
 
         qt_conf = p.join(p.dirname(sys.executable), 'qt.conf')
