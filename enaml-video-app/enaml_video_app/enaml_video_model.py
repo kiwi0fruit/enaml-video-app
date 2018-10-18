@@ -10,7 +10,7 @@ import numpy as np
 from typing import Tuple
 
 import os.path as p
-from .lib import cv
+from ._library import cv
 
 
 CAP_PERIOD = 0.020  # capture period in seconds
