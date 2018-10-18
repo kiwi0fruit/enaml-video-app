@@ -1,4 +1,5 @@
-# Needed for:
-# import the_module
+# The following code gets path to __init__.py file of the package:
+
+# import thepackage
 # import inspect
-# inspect.getfile(the_module)
+# inspect.getfile(thepackage)

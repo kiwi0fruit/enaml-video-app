@@ -19,20 +19,23 @@ class PostInstallCommand(install):
         """
         import enaml_video_app  # make sure the main module is installed
         import io
+        import sys
         import os
         from os import path as p
         import inspect
         from shortcutter import ShortCutter
-        from sys import executable as python_executable
 
         error_log = io.StringIO()
 
         sc = ShortCutter(error_log=error_log)
-        sc.create_desktop_shortcut('enaml-video-app')
+        if sys.platform == 'darwin':
+            sc.create_desktop_shortcut('enaml-video-appw')
+        else:
+            sc.create_desktop_shortcut('enaml-video-app')
         sc.create_desktop_shortcut('enaml-video-appw')
         sc.create_shortcut_to_env_terminal(menu=False)
 
-        qt_conf = p.join(p.dirname(python_executable), 'qt.conf')
+        qt_conf = p.join(p.dirname(sys.executable), 'qt.conf')
         # pyside_module = p.join(p.dirname(p.dirname(inspect.getfile(enaml_video_app))), 'PySide2')
         # pyside_include = p.join(pyside_module, 'include', 'PySide2')
         try:
