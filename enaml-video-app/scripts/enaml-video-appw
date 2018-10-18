@@ -1,2 +1,2 @@
 #!/bin/bash
-pythonw -m enaml_video_app.macospythonw "$@"
+pythonw -m enaml_video_app.enaml_video "$@"

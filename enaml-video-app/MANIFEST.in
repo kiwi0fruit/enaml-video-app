@@ -1,3 +1,2 @@
 include enaml_video_app/*
 include enaml_video_app/_library/*
-include enaml_video_app/macospythonw/*
