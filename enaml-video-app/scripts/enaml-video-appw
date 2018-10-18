@@ -1,2 +1,2 @@
 #!/bin/bash
-pythonw -m enaml_video_app --main
+pythonw -m enaml_video_app.gui "$@"
