@@ -1,1 +1,4 @@
-# needed for finding out where module is installed
+# Needed for:
+# import the_module
+# import inspect
+# inspect.getfile(the_module)
