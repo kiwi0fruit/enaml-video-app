@@ -55,3 +55,5 @@
        conda env remove --name enaml_video_app
 
   Sometimes conda environment is not deleted but renamed and placed to special trash folder inside root Miniconda installation. It's out of action this way but still takes disk space - you may need to delete it manually to free the space.
+
+8. If you need to reinstall the app (this would be with latest packages) simply run installation again: it will delete the appropriate environment first.

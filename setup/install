@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# <BEGIN> custom vars
+# -------- <custom vars> --------
 env=enaml_video_app
 yaml="./env_unix.yml"
 case "$(uname -s)" in
@@ -9,10 +9,10 @@ case "$(uname -s)" in
     MINGW*)
         yaml="./env_win.yml" ;;
 esac
-# <END> custom vars
+# -------- </custom vars> --------
 
 
-# <BEGIN> Miniconda path confirmation
+# ---- <miniconda path confirmation> ----
 _bin="bin"
 _python="bin/python"
 case "$(uname -s)" in
@@ -51,41 +51,44 @@ while true; do
         return 0
     fi
 done
-# <END> Miniconda path confirmation
+# ---- </miniconda path confirmation> ----
 
 
-# <BEGIN>
+# ---- <main> ----
 this_script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "${this_script_dir}"
 
 export PYTHONNOUSERSITE=1
 
+_prefix="${miniconda_dir}/envs/$env"
+
 _conda="${miniconda_dir}/${_bin}/conda"
 _activate="${miniconda_dir}/${_bin}/activate"
 _deactivate="${miniconda_dir}/${_bin}/deactivate"
-_pip="${miniconda_dir}/envs/$env/${_bin}/pip"
-_python="${miniconda_dir}/envs/$env/${_python}"
+_pip="${_prefix}/${_bin}/pip"
+_root_python="${miniconda_dir}/${_python}"
 
 "$_conda" env remove --name "$env"
-"$_python" "./clear_global_channels.py" "$_conda"
+"$_root_python" "./_clear_global_channels.py" "$_conda"
 "$_conda" env create --file "$yaml"
-# Do not specify custom -p/--prefix path
+# Do not specify custom -p/--prefix path as
 # this might make shortcut creation fail.
-# If you need so specify custim prefix
-# first add ${miniconda_dir}/bin to the PATH.
+# If you need so specify custom prefix
+# first add ${miniconda_dir}/${_bin} to the PATH
+# and change ${_prefix} accordingly.
 source "$_activate" "$env"
-# <END>
+# ---- </main> ----
 
 
-# <BEGIN> custom commands after activate
-# (inverse order):
-# "$_conda" config --env --add channels conda-forge
-# "$_conda" config --env --add channels defaults
+# -------- <custom commands after activate> ----
+# inverse order of channels:
+"$_conda" config --env --add channels conda-forge
+"$_conda" config --env --add channels defaults
 "$_conda" remove --force --yes pyqtgraph
 "$_pip" install git+https://github.com/pyqtgraph/pyqtgraph.git
 "$_conda" remove --force --yes qt pyqt sip
 "$_pip" install pyside2
-# <END> custom commands after activate
+# -------- </custom commands after activate> ----
 
 
 source "$_deactivate"

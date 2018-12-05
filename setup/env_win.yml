@@ -1,6 +1,7 @@
 name: enaml_video_app
 channels:
   - defaults
+  - conda-forge
 dependencies:
   - python=3.6
   - pip>=10.0.1
@@ -9,11 +10,12 @@ dependencies:
   #
   - enaml
   - pyqtgraph
-  # - pyopengl
   - matplotlib
+  # - python.app  # [macOS]
+  - pywin32  # [Windows]
+  # - pyopengl
   #
-  - pywin32
-  - opencv
+  - opencv>=3.4
   - cython
   - pip:
     - shortcutter
