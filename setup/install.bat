@@ -1,8 +1,7 @@
 @echo off
-set "miniconda_dir=%UserProfile%\Miniconda3"
-
 
 :: Begin Miniconda path confirmation
+set "miniconda_dir=%UserProfile%\Miniconda3"
 If not exist "%miniconda_dir%\Scripts\conda.exe" goto no
 :ask
 echo:
@@ -18,10 +17,10 @@ echo:
 echo Please type the path to Miniconda/Anaconda folder.
 echo (you can drag'n'drop or paste it right here)
 set /P miniconda_dir=Type the path (or 'x' to exit): %=%
-set "conda=%miniconda_dir%\Scripts\conda.exe"
-if exist "%conda%" goto ask
+set "_conda=%miniconda_dir%\Scripts\conda.exe"
+if exist "%_conda%" goto ask
 if "%miniconda_dir%" == "x" goto exit
-echo "%conda%" was not found!
+echo "%_conda%" was not found!
 goto no
 :yes
 :: End Miniconda path confirmation
@@ -33,17 +32,22 @@ cd /d %this_script_dir%
 set PYTHONNOUSERSITE=1
 
 set "env=enaml_video_app"
-set "conda=%miniconda_dir%\Scripts\conda.exe"
-set "activate=%miniconda_dir%\Scripts\activate.bat"
-set "pip=%miniconda_dir%\envs\%env%\Scripts\pip.exe"
+set "_conda=%miniconda_dir%\Scripts\conda.exe"
+set "_activate=%miniconda_dir%\Scripts\activate.bat"
+set "_pip=%miniconda_dir%\envs\%env%\Scripts\pip.exe"
 
-"%conda%" config --remove channels conda-forge
-"%conda%" env create --file env_win.yml
-call "%activate%" %env%
-"%conda%" remove --force --yes pyqtgraph
-"%pip%" install git+https://github.com/pyqtgraph/pyqtgraph.git
-"%conda%" remove --force --yes qt pyqt sip
-"%pip%" install pyside2
+"%_conda%" config --remove channels conda-forge
+
+"%_conda%" env create --file env_win.yml
+call "%_activate%" %env%
+:: set env channels (inverse order):
+:: "%_conda%" config --env --add channels conda-forge
+:: "%_conda%" config --env --add channels defaults
+
+"%_conda%" remove --force --yes pyqtgraph
+"%_pip%" install git+https://github.com/pyqtgraph/pyqtgraph.git
+"%_conda%" remove --force --yes qt pyqt sip
+"%_pip%" install pyside2
 
 pause
 :exit

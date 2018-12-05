@@ -1,18 +1,23 @@
 #!/bin/bash
-miniconda_dir=~/miniconda3
-
-
-# Begin Miniconda path confirmation
+_bin="bin"
+_python="bin/python"
+yaml="./env_unix.yml"
 case "$(uname -s)" in
+    Darwin*)
+        yaml="./env_mac.yml" 
+        ;;
     MINGW*)
         _bin="Scripts"
         _python="python.exe"
+        yaml="./env_win.yml" 
         ;;
     *)
-        _bin="bin"
-        _python="bin/python"
+        yaml="./env_unix.yml"
 esac
 
+
+# Begin Miniconda path confirmation
+miniconda_dir=~/miniconda3
 function yes_or_no {
     while true; do
         echo ""
@@ -56,10 +61,6 @@ _activate="${miniconda_dir}/${_bin}/activate"
 _pip="${miniconda_dir}/envs/$env/${_bin}/pip"
 _python="${miniconda_dir}/${_python}"
 
-yaml="./env_unix.yml"
-if [ "$(uname)" == "Darwin" ]; then
-    yaml="./env_mac.yml"      
-fi
 
 "$_conda" env remove --name "$env"
 "$_python" "./clear_global_channels.py" "$_conda"
