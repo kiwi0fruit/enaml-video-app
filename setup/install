@@ -1,22 +1,26 @@
 #!/bin/bash
-_bin="bin"
-_python="bin/python"
+
+# <BEGIN> custom vars
+env=enaml_video_app
 yaml="./env_unix.yml"
 case "$(uname -s)" in
     Darwin*)
-        yaml="./env_mac.yml" 
-        ;;
+        yaml="./env_mac.yml" ;;
+    MINGW*)
+        yaml="./env_win.yml" ;;
+esac
+# <END> custom vars
+
+
+# <BEGIN> Miniconda path confirmation
+_bin="bin"
+_python="bin/python"
+case "$(uname -s)" in
     MINGW*)
         _bin="Scripts"
-        _python="python.exe"
-        yaml="./env_win.yml" 
-        ;;
-    *)
-        yaml="./env_unix.yml"
+        _python="python.exe" ;;
 esac
 
-
-# Begin Miniconda path confirmation
 miniconda_dir=~/miniconda3
 function yes_or_no {
     while true; do
@@ -47,36 +51,41 @@ while true; do
         return 0
     fi
 done
-# End Miniconda path confirmation
+# <END> Miniconda path confirmation
 
 
+# <BEGIN>
 this_script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "${this_script_dir}"
 
 export PYTHONNOUSERSITE=1
 
-env=enaml_video_app
 _conda="${miniconda_dir}/${_bin}/conda"
 _activate="${miniconda_dir}/${_bin}/activate"
+_deactivate="${miniconda_dir}/${_bin}/deactivate"
 _pip="${miniconda_dir}/envs/$env/${_bin}/pip"
-_python="${miniconda_dir}/${_python}"
-
+_python="${miniconda_dir}/envs/$env/${_python}"
 
 "$_conda" env remove --name "$env"
 "$_python" "./clear_global_channels.py" "$_conda"
-
 "$_conda" env create --file "$yaml"
-source "$_activate" $env
-# set env channels (inverse order):
-# "$_conda" config --env --add channels conda-forge
-# "$_conda" config --env --add channels defaults
-
-"$_conda" remove --force --yes pyqtgraph
-"$_pip" install git+https://github.com/pyqtgraph/pyqtgraph.git
-"$_conda" remove --force --yes qt pyqt sip
-"$_pip" install pyside2
-
 # Do not specify custom -p/--prefix path
 # this might make shortcut creation fail.
 # If you need so specify custim prefix
 # first add ${miniconda_dir}/bin to the PATH.
+source "$_activate" "$env"
+# <END>
+
+
+# <BEGIN> custom commands after activate
+# (inverse order):
+# "$_conda" config --env --add channels conda-forge
+# "$_conda" config --env --add channels defaults
+"$_conda" remove --force --yes pyqtgraph
+"$_pip" install git+https://github.com/pyqtgraph/pyqtgraph.git
+"$_conda" remove --force --yes qt pyqt sip
+"$_pip" install pyside2
+# <END> custom commands after activate
+
+
+source "$_deactivate"

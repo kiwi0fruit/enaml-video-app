@@ -1,6 +1,12 @@
 @echo off
 
-:: Begin Miniconda path confirmation
+:: <BEGIN> custom vars
+set "env=enaml_video_app"
+set "yaml=env_win.yml"
+:: <END> custom vars
+
+
+:: <BEGIN> Miniconda path confirmation
 set "miniconda_dir=%UserProfile%\Miniconda3"
 If not exist "%miniconda_dir%\Scripts\conda.exe" goto no
 :ask
@@ -23,35 +29,43 @@ if "%miniconda_dir%" == "x" goto exit
 echo "%_conda%" was not found!
 goto no
 :yes
-:: End Miniconda path confirmation
+:: <END> Miniconda path confirmation
 
 
+:: <BEGIN>
 set "this_script_dir=%~dp0"
 cd /d %this_script_dir%
 
 set PYTHONNOUSERSITE=1
 
-set "env=enaml_video_app"
 set "_conda=%miniconda_dir%\Scripts\conda.exe"
 set "_activate=%miniconda_dir%\Scripts\activate.bat"
+set "_deactivate=%miniconda_dir%\Scripts\deactivate.bat"
 set "_pip=%miniconda_dir%\envs\%env%\Scripts\pip.exe"
+set "_python=%miniconda_dir%\envs\%env%\python.exe"
 
-"%_conda%" config --remove channels conda-forge
-
-"%_conda%" env create --file env_win.yml
-call "%_activate%" %env%
-:: set env channels (inverse order):
-:: "%_conda%" config --env --add channels conda-forge
-:: "%_conda%" config --env --add channels defaults
-
-"%_conda%" remove --force --yes pyqtgraph
-"%_pip%" install git+https://github.com/pyqtgraph/pyqtgraph.git
-"%_conda%" remove --force --yes qt pyqt sip
-"%_pip%" install pyside2
-
-pause
-:exit
+"%_conda%" env remove --name %env%
+"%_python%" ".\clear_global_channels.py" "%_conda%"
+"%_conda%" env create --file %yaml%
 :: Do not specify custom -p/--prefix path
 :: this might make shortcut creation fail.
 :: If you need so specify custim prefix
 :: first add %miniconda_dir%\Scripts to the PATH.
+call "%_activate%" %env%
+:: <END>
+
+
+:: <BEGIN> custom commands after activate
+:: (inverse order):
+:: "%_conda%" config --env --add channels conda-forge
+:: "%_conda%" config --env --add channels defaults
+"%_conda%" remove --force --yes pyqtgraph
+"%_pip%" install git+https://github.com/pyqtgraph/pyqtgraph.git
+"%_conda%" remove --force --yes qt pyqt sip
+"%_pip%" install pyside2
+:: <END> custom commands after activate
+
+
+call "%_deactivate%"
+pause
+:exit
