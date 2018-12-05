@@ -1,12 +1,12 @@
 @echo off
 
-:: -------- <custom vars> --------
+:: -------- <custom vars> ----
 set "env=enaml_video_app"
 set "yaml=env_win.yml"
-:: -------- </custom vars> --------
+:: -------- </custom vars> ----
 
 
-:: ---- <miniconda path confirmation> ----
+:: <miniconda path confirmation>
 set "miniconda_dir=%UserProfile%\Miniconda3"
 If not exist "%miniconda_dir%\Scripts\conda.exe" goto no
 :ask
@@ -29,10 +29,10 @@ if "%miniconda_dir%" == "x" goto exit
 echo "%_conda%" was not found!
 goto no
 :yes
-:: ---- </miniconda path confirmation> ----
+:: </miniconda path confirmation>
 
 
-:: ---- <main> ----
+:: <main>
 set "this_script_dir=%~dp0"
 cd /d %this_script_dir%
 
@@ -55,7 +55,7 @@ set "_root_python=%miniconda_dir%\python.exe"
 :: first add %miniconda_dir%\Scripts to the PATH
 :: and change %_prefix% accordingly.
 call "%_activate%" %env%
-:: ---- </main> ----
+:: </main>
 
 
 :: -------- <custom commands after activate> ----

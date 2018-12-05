@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# -------- <custom vars> --------
+# -------- <custom vars> ----
 env=enaml_video_app
 yaml="./env_unix.yml"
 case "$(uname -s)" in
@@ -9,10 +9,10 @@ case "$(uname -s)" in
     MINGW*)
         yaml="./env_win.yml" ;;
 esac
-# -------- </custom vars> --------
+# -------- </custom vars> ----
 
 
-# ---- <miniconda path confirmation> ----
+# <miniconda path confirmation>
 _bin="bin"
 _python="bin/python"
 case "$(uname -s)" in
@@ -51,10 +51,10 @@ while true; do
         return 0
     fi
 done
-# ---- </miniconda path confirmation> ----
+# </miniconda path confirmation>
 
 
-# ---- <main> ----
+# <main>
 this_script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "${this_script_dir}"
 
@@ -77,7 +77,7 @@ _root_python="${miniconda_dir}/${_python}"
 # first add ${miniconda_dir}/${_bin} to the PATH
 # and change ${_prefix} accordingly.
 source "$_activate" "$env"
-# ---- </main> ----
+# </main>
 
 
 # -------- <custom commands after activate> ----
