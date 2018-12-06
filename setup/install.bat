@@ -38,19 +38,16 @@ goto no
 cd /d %this_script_dir%
 
 set PYTHONNOUSERSITE=1
+set "PATH=%miniconda_dir%\Scripts;%PATH%"
 
-set "_root_python=%miniconda_dir%\python.exe"
-set "_conda=%miniconda_dir%\Scripts\conda.exe"
-set "_activate=%miniconda_dir%\Scripts\activate.bat"
-
-"%_conda%" env remove --name %env%
-"%_root_python%" "%this_script_dir%\setup\clear_global_channels.py" "%_conda%"
-"%_conda%" env create --file "%this_script_dir%\env\%yaml%"
+"%miniconda_dir%\python.exe" "%this_script_dir%\setup\clear_global_channels.py" "%miniconda_dir%\Scripts\conda.exe"
+%run% conda env remove --name %env%
+%run% conda env create --file "%this_script_dir%\env\%yaml%"
 :: Do not specify custom -p/--prefix path as
 :: this might make shortcut creation fail.
 :: If you need so specify custom prefix
 :: first add %miniconda_dir%\Scripts to the PATH
-call "%_activate%" %env%
+%call% activate %env%
 :: </main>
 
 
