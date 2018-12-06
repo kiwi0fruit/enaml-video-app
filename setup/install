@@ -59,6 +59,7 @@ _conda="${miniconda_dir}/${_bin}/conda"
 _activate="${miniconda_dir}/${_bin}/activate"
 _deactivate="${miniconda_dir}/${_bin}/deactivate"
 _pip="${_prefix}/${_bin}/pip"
+_python="${_prefix}/${_python}"
 _root_python="${miniconda_dir}/${_python}"
 
 "$_conda" env remove --name "$env"
