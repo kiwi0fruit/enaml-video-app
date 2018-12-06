@@ -1,4 +1,4 @@
-# Installation
+# Install
 
 1. Download video [Cosmos Laundromat](https://cloud.blender.org/p/cosmos-laundromat/55f35f7f2beb3300960bb077),
    place it on the desktop and rename to `cosmos_laundromat.mp4`  
@@ -49,11 +49,19 @@
     - type dot (`.`), type space (` `),
     - drag'n'drop `install` script to the terminal, enter  
 
-7. If you need to uninstall environment - run terminal with
-  activated root conda environment. Then type:
 
-       conda env remove --name enaml_video_app
+## Uninstall
 
-    Sometimes conda environment is not deleted but renamed and placed to special trash folder inside root Miniconda installation. It's out of action this way but still takes disk space - you may need to delete it manually to free the space.
+If you need to uninstall environment - run terminal with
+activated root conda environment. Then type:
 
-8. If you need to reinstall the app (this would be with latest packages) simply run installation again: it will delete the appropriate environment first.
+    conda env remove --name enaml_video_app
+
+Sometimes conda environment is not deleted but renamed and placed to special trash folder inside root Miniconda installation. It's out of action this way but still takes disk space - you may need to delete it manually to free the space.
+
+
+## Reinstall
+
+If you need to reinstall the app (this would be with latest packages) simply run installation again: it will delete the appropriate environment first.
+
+*Save this folder somewhere in case you would like to reinstall it in future*.
