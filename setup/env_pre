@@ -1,9 +1,0 @@
-#!/bin/bash
-env=enaml_video_app
-yaml="./env_unix.yml"
-case "$(uname -s)" in
-    Darwin*)
-        yaml="./env_mac.yml" ;;
-    MINGW*)
-        yaml="./env_win.yml" ;;
-esac

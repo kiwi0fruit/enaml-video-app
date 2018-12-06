@@ -1,0 +1,11 @@
+#!/bin/bash
+# inverse order of channels:
+conda config --env --add channels conda-forge
+conda config --env --add channels defaults
+
+conda remove --force --yes pyqtgraph
+pip install git+https://github.com/pyqtgraph/pyqtgraph.git
+conda remove --force --yes qt pyqt sip
+pip install pyside2
+
+# python -m ipykernel install --user --name "$env"
