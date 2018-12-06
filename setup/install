@@ -1,18 +1,9 @@
 #!/bin/bash
+this_script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# -------- <custom vars> ----
-env=enaml_video_app
-yaml="./env_unix.yml"
-case "$(uname -s)" in
-    Darwin*)
-        yaml="./env_mac.yml" ;;
-    MINGW*)
-        yaml="./env_win.yml" ;;
-esac
-
-# don't forget to set <custom commands after activate>
-# at the end of the file!
-# -------- </custom vars> ----
+# <custom vars>
+source "${this_script_dir}/env_pre"
+# </custom vars>
 
 
 # <miniconda path confirmation>
@@ -58,7 +49,6 @@ done
 
 
 # <main>
-this_script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "${this_script_dir}"
 
 export PYTHONNOUSERSITE=1
@@ -83,15 +73,9 @@ source "$_activate" "$env"
 # </main>
 
 
-# -------- <custom commands after activate> ----
-# inverse order of channels:
-"$_conda" config --env --add channels conda-forge
-"$_conda" config --env --add channels defaults
-"$_conda" remove --force --yes pyqtgraph
-"$_pip" install git+https://github.com/pyqtgraph/pyqtgraph.git
-"$_conda" remove --force --yes qt pyqt sip
-"$_pip" install pyside2
-# -------- </custom commands after activate> ----
+# <custom commands after activate>
+source "${this_script_dir}/env_post"
+# </custom commands after activate>
 
 
 source "$_deactivate"

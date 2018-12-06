@@ -1,12 +1,9 @@
 @echo off
+set "this_script_dir=%~dp0"
 
-:: -------- <custom vars> ----
-set "env=enaml_video_app"
-set "yaml=env_win.yml"
-
-:: don't forget to set <custom commands after activate>
-:: at the end of the file!
-:: -------- </custom vars> ----
+:: <custom vars>
+call "%this_script_dir%\env_pre.bat"
+:: </custom vars>
 
 
 :: <miniconda path confirmation>
@@ -36,7 +33,6 @@ goto no
 
 
 :: <main>
-set "this_script_dir=%~dp0"
 cd /d %this_script_dir%
 
 set PYTHONNOUSERSITE=1
@@ -48,9 +44,10 @@ set "_activate=%miniconda_dir%\Scripts\activate.bat"
 set "_deactivate=%miniconda_dir%\Scripts\deactivate.bat"
 set "_pip=%_prefix%\Scripts\pip.exe"
 set "_root_python=%miniconda_dir%\python.exe"
+set "_python=%_prefix%\python.exe"
 
 "%_conda%" env remove --name %env%
-"%_root_python%" ".\_clear_global_channels.py" "%_conda%"
+"%_root_python%" "%this_script_dir%\_clear_global_channels.py" "%_conda%"
 "%_conda%" env create --file %yaml%
 :: Do not specify custom -p/--prefix path as
 :: this might make shortcut creation fail.
@@ -61,15 +58,9 @@ call "%_activate%" %env%
 :: </main>
 
 
-:: -------- <custom commands after activate> ----
-:: inverse order of channels:
-"%_conda%" config --env --add channels conda-forge
-"%_conda%" config --env --add channels defaults
-"%_conda%" remove --force --yes pyqtgraph
-"%_pip%" install git+https://github.com/pyqtgraph/pyqtgraph.git
-"%_conda%" remove --force --yes qt pyqt sip
-"%_pip%" install pyside2
-:: -------- </custom commands after activate> ----
+:: <custom commands after activate>
+call "%this_script_dir%\env_post.bat"
+:: </custom commands after activate>
 
 
 call "%_deactivate%"
