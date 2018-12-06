@@ -9,6 +9,9 @@ case "$(uname -s)" in
     MINGW*)
         yaml="./env_win.yml" ;;
 esac
+
+# don't forget to set <custom commands after activate>
+# at the end of the file!
 # -------- </custom vars> ----
 
 
