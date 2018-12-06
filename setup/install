@@ -4,7 +4,6 @@ source="${this_script_dir}/setup/path-source"
 
 # <custom vars>
 source "${this_script_dir}/env/pre"
-yaml="${this_script_dir}/env/$yaml"
 # </custom vars>
 
 
@@ -61,7 +60,7 @@ _activate="${miniconda_dir}/${_bin}/activate"
 
 "$_conda" env remove --name "$env"
 "$_root_python" "${this_script_dir}/setup/clear_global_channels.py" "$_conda"
-"$_conda" env create --file "$yaml"
+"$_conda" env create --file "${this_script_dir}/env/$yaml"
 # Do not specify custom -p/--prefix path as
 # this might make shortcut creation fail.
 # If you need so specify custom prefix

@@ -5,7 +5,6 @@ set call=call "%this_script_dir%\setup\path-call.bat"
 
 :: <custom vars>
 call "%this_script_dir%\env\pre.bat"
-set "yaml=%this_script_dir%\env\%yaml%"
 :: </custom vars>
 
 
@@ -46,7 +45,7 @@ set "_activate=%miniconda_dir%\Scripts\activate.bat"
 
 "%_conda%" env remove --name %env%
 "%_root_python%" "%this_script_dir%\setup\clear_global_channels.py" "%_conda%"
-"%_conda%" env create --file %yaml%
+"%_conda%" env create --file "%this_script_dir%\env\%yaml%"
 :: Do not specify custom -p/--prefix path as
 :: this might make shortcut creation fail.
 :: If you need so specify custom prefix
