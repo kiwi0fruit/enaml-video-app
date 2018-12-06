@@ -62,7 +62,7 @@ _pip="${_prefix}/${_bin}/pip"
 _root_python="${miniconda_dir}/${_python}"
 
 "$_conda" env remove --name "$env"
-"$_root_python" "./_clear_global_channels.py" "$_conda"
+"$_root_python" "${this_script_dir}/_clear_global_channels.py" "$_conda"
 "$_conda" env create --file "$yaml"
 # Do not specify custom -p/--prefix path as
 # this might make shortcut creation fail.
