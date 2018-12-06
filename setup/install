@@ -21,7 +21,7 @@ case "$(uname -s)" in
         _python="python.exe" ;;
 esac
 
-miniconda_dir=~/miniconda3
+miniconda_dir="~/miniconda3"
 function yes_or_no {
     while true; do
         echo ""
