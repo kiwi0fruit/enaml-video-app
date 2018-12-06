@@ -40,8 +40,8 @@
 
 6. Create conda environment with the app (**on Linux/macOS**):
 
-    - open this folder in terminal,
-    - type `. ./install`,  
+    - open *this folder* in terminal,
+    - type `. ./install`, enter,  
 
       >  **or**  
 
