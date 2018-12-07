@@ -10,10 +10,13 @@ source "${this_script_dir}/env/pre"
 # <miniconda path confirmation>
 _bin="bin"
 _python="bin/python"
+_conda="bin/conda"
 case "$(uname -s)" in
     MINGW*)
         _bin="Scripts"
-        _python="python.exe" ;;
+        _python="python.exe"
+        _conda="Scripts/conda.exe"
+        ;;
 esac
 
 miniconda_dir="~/miniconda3"
@@ -30,18 +33,18 @@ function yes_or_no {
     done
 }
 
-_conda="${miniconda_dir}/${_bin}/conda"
+conda_path="${miniconda_dir}/${_conda}"
 while true; do
-    if [ -f "$_conda" ]; then
+    if [ -f "$conda_path" ]; then
         yes_or_no && break
     else
-        echo "\"${_conda}\" was not found!"
+        echo "\"${conda_path}\" was not found!"
     fi
     echo ""
     echo "Please type the path to Miniconda/Anaconda folder."
     echo "(you can drag'n'drop or paste it right here)"
     read -p "Type the path (or 'x' to exit): " miniconda_dir
-    _conda="${miniconda_dir}/${_bin}/conda"
+    conda_path="${miniconda_dir}/${_conda}"
     if [ "${miniconda_dir}" == "x" ]; then
         return 0
     fi
@@ -49,26 +52,19 @@ done
 # </miniconda path confirmation>
 
 
-# <main>
 cd "${this_script_dir}"
 
 export PYTHONNOUSERSITE=1
 export PATH="${miniconda_dir}/${_bin}:$PATH"
 
-"${miniconda_dir}/${_python}" "${this_script_dir}/setup/clear_global_channels.py" "${miniconda_dir}/${_bin}/conda"
+"${miniconda_dir}/${_python}" "${this_script_dir}/setup/clear_global_channels.py" "${conda_path}"
 conda env remove --name "$env"
 conda env create --file "${this_script_dir}/env/$yaml"
-# Do not specify custom -p/--prefix path as
-# this might make shortcut creation fail.
-# If you need so specify custom prefix
-# first add ${miniconda_dir}/${_bin} to the PATH
 . "$source" activate "$env"
-# </main>
 
 
 # <custom commands after activate>
 source "${this_script_dir}/env/post"
 # </custom commands after activate>
-
 
 . "$source" deactivate

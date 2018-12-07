@@ -25,36 +25,29 @@ echo:
 echo Please type the path to Miniconda/Anaconda folder.
 echo (you can drag'n'drop or paste it right here)
 set /P miniconda_dir=Type the path (or 'x' to exit): %=%
-set "_conda=%miniconda_dir%\Scripts\conda.exe"
-if exist "%_conda%" goto ask
+set "conda_path=%miniconda_dir%\Scripts\conda.exe"
+if exist "%conda_path%" goto ask
 if "%miniconda_dir%" == "x" goto exit
-echo "%_conda%" was not found!
+echo "%conda_path%" was not found!
 goto no
 :yes
 :: </miniconda path confirmation>
 
 
-:: <main>
 cd /d %this_script_dir%
 
 set PYTHONNOUSERSITE=1
 set "PATH=%miniconda_dir%\Scripts;%PATH%"
 
-"%miniconda_dir%\python.exe" "%this_script_dir%\setup\clear_global_channels.py" "%miniconda_dir%\Scripts\conda.exe"
+"%miniconda_dir%\python.exe" "%this_script_dir%\setup\clear_global_channels.py" "%conda_path%"
 %run% conda env remove --name %env%
 %run% conda env create --file "%this_script_dir%\env\%yaml%"
-:: Do not specify custom -p/--prefix path as
-:: this might make shortcut creation fail.
-:: If you need so specify custom prefix
-:: first add %miniconda_dir%\Scripts to the PATH
 %call% activate %env%
-:: </main>
 
 
 :: <custom commands after activate>
 call "%this_script_dir%\env\post.bat"
 :: </custom commands after activate>
-
 
 %call% deactivate
 pause
