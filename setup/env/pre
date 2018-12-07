@@ -1,6 +1,6 @@
 #!/bin/bash
 env=enaml_video_app
-yaml="unix.yml"
+yaml="def.yml"
 case "$(uname -s)" in
     Darwin*)
         yaml="mac.yml" ;;
