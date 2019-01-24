@@ -1,7 +1,13 @@
 #!/bin/bash
-script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd "${script_dir}"
+cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+export cwd_url=$(python -c "import pathlib; print(pathlib.Path.cwd().as_uri())")
 
+# create pip source package:
+# (sdist is a source distribution but
+#  it can be changed to a binary wheel):
 python setup.py sdist
-# sdist is a source distribution
-# it can be changed to binary wheel
+
+# create conda source package:
+# (it's 'noarch' at the moment but
+#  it can be changed to a compiled binary):
+conda build . --output-folder ./dist

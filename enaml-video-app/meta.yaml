@@ -1,0 +1,31 @@
+{% set name = "enaml-video-app" %}
+{% set version = "0.1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: {{ os.environ['cwd_url'] }}/dist/{{ name }}-{{ version }}.tar.gz
+
+build:
+  noarch: python
+  entry_points:
+    - enaml-video-app = enaml_video_app.enaml_video:main
+  number: 0
+  script: "pip install .  --no-deps -vv"
+
+requirements:
+  host:
+    - python >=3.6
+    - pip
+    - setuptools
+  run:
+    - python >=3.6
+
+about:
+  home: https://github.com/kiwi0fruit/enaml-video-app
+  license: MIT
+  # license_family: MIT
+  # license_file: LICENSE
+  summary: "Enaml video application."

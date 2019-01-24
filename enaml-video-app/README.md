@@ -21,3 +21,14 @@ environment via Shortcutter:
       shortcutter --terminal
 
 * To start Bash on windows type `%b%` in the terminal created via Shortcutter
+
+
+# Building conda package
+
+First:
+
+    conda install conda-build
+
+you also should have python>=3.6 available to the `build` script.
+
+Outputs of building can be found in the `./dist/noarch`
