@@ -60,7 +60,7 @@ export PATH="${miniconda_dir}/${_bin}:$PATH"
 . "$source" activate root
 "${miniconda_dir}/${_python}" "${this_script_dir}/setup/clear_global_channels.py" "${conda_path}"
 
-conda remove -n "$env" *
+conda remove -n "$env" --all
 conda env remove -n "$env"
 conda update --all
 conda env create --file "${this_script_dir}/env/$yaml"
