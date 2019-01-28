@@ -42,7 +42,7 @@ set "PATH=%miniconda_dir%\Scripts;%PATH%"
 %call% activate root
 "%miniconda_dir%\python.exe" "%this_script_dir%\setup\clear_global_channels.py" "%conda_path%"
 
-%run% conda remove -n "%env%" *
+%run% conda remove -n "%env%" --all
 %run% conda env remove --name "%env%"
 %run% conda update --all
 %run% conda env create --file "%this_script_dir%\env\%yaml%"
