@@ -6,7 +6,7 @@
 # """
 
 
-def ready(self):
+def ready():
     """
     Creates desktop shortcuts to enaml-video-app
     via shortcutter: https://github.com/kiwi0fruit/shortcutter
