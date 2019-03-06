@@ -21,7 +21,7 @@ requirements:
     - python >=3.6
     - pip
   run:
-    - python >=3.6
+    - python >=3.6  # IMPORTANT also put all deps to env spec 
 
 about:
   home: https://github.com/kiwi0fruit/enaml-video-app

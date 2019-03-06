@@ -3,10 +3,11 @@
 conda config --env --add channels conda-forge
 conda config --env --add channels defaults
 
+conda install "./enaml-video-app-0.1.0-py_0.tar.bz2"
 conda remove --force --yes pyqtgraph
-pip install git+https://github.com/pyqtgraph/pyqtgraph.git
-conda remove --force --yes qt pyqt sip
-pip install pyside2
+conda install --copy --yes pyqtgraph
+pip install --ignore-installed git+https://github.com/pyqtgraph/pyqtgraph.git
+pip install --ignore-installed pyside2
 
 # python -m ipykernel install --user --name "$env"
 

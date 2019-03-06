@@ -18,4 +18,3 @@ dependencies:
   - cython
   - shortcutter
   - git
-  - "./enaml-video-app-0.1.0-py_0.tar.bz2"
