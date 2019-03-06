@@ -1,9 +1,8 @@
 #!/bin/bash
-this_script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source="${this_script_dir}/setup/path-source"
+here="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # <custom vars>
-source "${this_script_dir}/env/pre"
+source "$here/env/pre"
 # </custom vars>
 
 
@@ -11,19 +10,17 @@ source "${this_script_dir}/env/pre"
 _bin="bin"
 _python="bin/python"
 _conda="bin/conda"
-case "$(uname -s)" in
-    MINGW*)
-        _bin="Scripts"
-        _python="python.exe"
-        _conda="Scripts/conda.exe"
-        ;;
-esac
+if [[ "$OSTYPE" == "msys" ]]; then
+    _bin="Scripts"
+    _python="python.exe"
+    _conda="Scripts/conda.exe"
+fi
 
-miniconda_dir="~/miniconda3"
+prefix="~/miniconda3"
 function yes_or_no {
     while true; do
         echo ""
-        echo "Is Miniconda/Anaconda installed to \"${miniconda_dir}\"? (yes/no)"
+        echo "Is Miniconda/Anaconda installed to \"$prefix\"? (yes/no)"
         read -p "Type 'y' or 'n': " yn
         case $yn in
             [Yy]*) return 0 ;;  
@@ -33,44 +30,47 @@ function yes_or_no {
     done
 }
 
-conda_path="${miniconda_dir}/${_conda}"
+conda="$prefix/$_conda"
 while true; do
-    if [ -f "$conda_path" ]; then
+    if [ -f "$conda" ]; then
         yes_or_no && break
     else
-        echo "\"${conda_path}\" was not found!"
+        echo "\"$conda\" was not found!"
     fi
     echo ""
     echo "Please type the path to Miniconda/Anaconda folder."
     echo "(you can drag'n'drop or paste it right here)"
-    read -p "Type the path (or 'x' to exit): " miniconda_dir
-    conda_path="${miniconda_dir}/${_conda}"
-    if [ "${miniconda_dir}" == "x" ]; then
+    read -p "Type the path (or 'x' to exit): " prefix
+    conda="$prefix/$_conda"
+    if [ "$prefix" == "x" ]; then
         return 0
     fi
 done
 # </miniconda path confirmation>
 
 
-cd "${this_script_dir}"
-
 export PYTHONNOUSERSITE=1
-export PATH="${miniconda_dir}/${_bin}:$PATH"
+export PATH="$prefix/$_bin:$prefix/condabin:$PATH"
 
-. "$source" activate root
-"${miniconda_dir}/${_python}" "${this_script_dir}/setup/clear_global_channels.py" "${conda_path}"
+source "$(type -p activate)" base
+
+_cnd=conda
+if [[ "$OSTYPE" == "msys" ]]; then
+    _cnd="$(cygpath -w "$(type -p conda.exe)")"; fi
+"$prefix/$_python" "$here/setup/clear_global_channels.py" "$_cnd"
 
 conda remove -n "$env" --all
 conda env remove -n "$env"
-conda update --all
-conda env create --file "${this_script_dir}/env/$yaml"
+conda update conda
+conda env create --file "$here/env/$yaml"
 
-. "$source" deactivate
-. "$source" activate "$env"
+conda deactivate
+source "$(type -p activate)" "$env"
 
 
 # <custom commands after activate>
-source "${this_script_dir}/env/post"
+cd "$here/env"
+source "$here/env/post"
 # </custom commands after activate>
 
-. "$source" deactivate
+conda deactivate

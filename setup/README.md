@@ -16,19 +16,7 @@
       (open folder with downloaded Miniconda in the terminal before running the command),
     * [macOS install instruction](https://conda.io/docs/user-guide/install/macos.html).
 
-4. Install [Git](https://git-scm.com/downloads).
-  Install instructions are straight-forward. Another
-  option on macOS is to install the Xcode Command
-  Line Tools. On Mavericks (10.9) or above you can
-  do this simply by trying to run git from the
-  Terminal the very first time.
-
-       git --version
-
-    If you don’t have it installed already, it will
-    prompt you to install it.
-
-5. Create conda environment with the app (**on Windows**):  
+4. Create conda environment with the app (**on Windows**):  
 
     - run `install.bat` in this folder.  
 
@@ -38,7 +26,7 @@
       > drag'n'drop `install.bat` script into the cmd window,
       > press enter.
 
-6. Create conda environment with the app (**on Linux/macOS**):
+5. Create conda environment with the app (**on Linux/macOS**):
 
     - open *this folder* in terminal,
     - type `. ./install`, enter,  

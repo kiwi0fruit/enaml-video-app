@@ -9,3 +9,5 @@
 %run% pip install pyside2
 
 :: %run% python -m ipykernel install --user --name %env%
+
+%run% enaml-video-app-ready

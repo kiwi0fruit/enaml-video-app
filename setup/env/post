@@ -9,3 +9,5 @@ conda remove --force --yes qt pyqt sip
 pip install pyside2
 
 # python -m ipykernel install --user --name "$env"
+
+enaml-video-app-ready

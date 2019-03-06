@@ -20,6 +20,7 @@ setup(
     entry_points={
         'console_scripts': [
             'enaml-video-app=enaml_video_app.enaml_video:main',
+            'enaml-video-app-ready=enaml_video_app.ready:ready',
         ],
     },
 

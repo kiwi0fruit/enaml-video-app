@@ -10,4 +10,4 @@ python setup.py sdist
 # create conda source package:
 # (it's 'noarch' at the moment but
 #  it can be changed to a compiled binary):
-conda build . --output-folder ./dist
+conda build ./conda --output-folder ./dist

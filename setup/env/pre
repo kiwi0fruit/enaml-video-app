@@ -1,9 +1,7 @@
 #!/bin/bash
 env=enaml_video_app
 yaml="def.yml"
-case "$(uname -s)" in
-    Darwin*)
-        yaml="mac.yml" ;;
-    MINGW*)
-        yaml="win.yml" ;;
-esac
+if [[ "$OSTYPE" == "msys" ]]; then
+    yaml="def.yml"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    yaml="mac.yml"; fi

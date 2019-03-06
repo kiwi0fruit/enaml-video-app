@@ -1,0 +1,6 @@
+#!/bin/bash
+cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+python setup.py sdist
+# sdist is a source distribution
+# it can be changed to binary wheel

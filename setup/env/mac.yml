@@ -12,12 +12,10 @@ dependencies:
   - pyqtgraph
   - matplotlib
   - python.app  # [macOS]
-  # - pywin32  # [Windows]
   # - pyopengl
   #
   - opencv>=3.4
   - cython
-  - pip:
-    - shortcutter
-    - "./enaml-video-app-0.1.0.tar.gz"
-    - "./enaml-video-app-ready-0.1.0.tar.gz"
+  - shortcutter
+  - git
+  - "./enaml-video-app-0.1.0-py_0.tar.bz2"

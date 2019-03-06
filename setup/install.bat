@@ -1,19 +1,19 @@
 @echo off
-set "this_script_dir=%~dp0"
-set run=call "%this_script_dir%\setup\path-run.bat"
-set call=call "%this_script_dir%\setup\path-call.bat"
+set "here=%~dp0"
+set run=call "%here%\setup\path-run.bat"
+set call=call "%here%\setup\path-call.bat"
 
 :: <custom vars>
-call "%this_script_dir%\env\pre.bat"
+call "%here%\env\pre.bat"
 :: </custom vars>
 
 
 :: <miniconda path confirmation>
-set "miniconda_dir=%UserProfile%\Miniconda3"
-If not exist "%miniconda_dir%\Scripts\conda.exe" goto no
+set "prefix=%UserProfile%\Miniconda3"
+If not exist "%prefix%\Scripts\conda.exe" goto no
 :ask
 echo:
-echo Is Miniconda/Anaconda installed to "%miniconda_dir%"? (yes/no)
+echo Is Miniconda/Anaconda installed to "%prefix%"? (yes/no)
 set INPUT=
 set /P INPUT=Type 'y' or 'n': %=%
 if /I "%INPUT%"=="y" goto yes
@@ -24,37 +24,38 @@ goto ask
 echo:
 echo Please type the path to Miniconda/Anaconda folder.
 echo (you can drag'n'drop or paste it right here)
-set /P miniconda_dir=Type the path (or 'x' to exit): %=%
-set "conda_path=%miniconda_dir%\Scripts\conda.exe"
-if exist "%conda_path%" goto ask
-if "%miniconda_dir%" == "x" goto exit
-echo "%conda_path%" was not found!
+set /P prefix=Type the path (or 'x' to exit): %=%
+set "conda=%prefix%\Scripts\conda.exe"
+if exist "%conda%" goto ask
+if "%prefix%" == "x" goto exit
+echo "%conda%" was not found!
 goto no
 :yes
+
+set "_cnd=%conda%"
 :: </miniconda path confirmation>
 
 
-cd /d "%this_script_dir%"
-
 set PYTHONNOUSERSITE=1
-set "PATH=%miniconda_dir%\Scripts;%PATH%"
+set "PATH=%prefix%\Scripts;%prefix%\condabin;%PATH%"
 
-%call% activate root
-"%miniconda_dir%\python.exe" "%this_script_dir%\setup\clear_global_channels.py" "%conda_path%"
+%call% activate.bat base
+"%prefix%\python.exe" "%here%\setup\clear_global_channels.py" "%_cnd%"
 
-%run% conda remove -n "%env%" --all
-%run% conda env remove --name "%env%"
-%run% conda update --all
-%run% conda env create --file "%this_script_dir%\env\%yaml%"
+%run% conda.exe remove -n "%env%" --all
+%run% conda.exe env remove --name "%env%"
+%run% conda.exe update conda
+%run% conda.exe env create --file "%here%\env\%yaml%"
 
-%call% deactivate
-%call% activate "%env%"
+%call% conda.bat deactivate
+%call% activate.bat "%env%"
 
 
 :: <custom commands after activate>
-call "%this_script_dir%\env\post.bat"
+cd /d "%here%\env"
+call "%here%\env\post.bat"
 :: </custom commands after activate>
 
-%call% deactivate
+%call% conda.bat deactivate
 pause
 :exit
