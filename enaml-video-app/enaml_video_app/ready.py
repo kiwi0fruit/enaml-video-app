@@ -31,7 +31,7 @@ def ready(self):
         os.remove(qt_conf)
     except Exception as e:
         if p.isfile(qt_conf):
-        print(e, file=error_log)
+            print(e, file=error_log)
     # try:
     #     pyside_module = p.join(p.dirname(p.dirname(__file__)), 'PySide2')
     #     pyside_include = p.join(pyside_module, 'include', 'PySide2')
