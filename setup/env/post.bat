@@ -5,7 +5,6 @@
 
 %run% conda install ".\enaml-video-app-0.1.0-py_0.tar.bz2"
 %run% conda remove --force --yes pyqtgraph
-%run% conda install --copy --yes pyqtgraph
 %run% pip install git+https://github.com/pyqtgraph/pyqtgraph.git
 %run% pip install pyside2
 

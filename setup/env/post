@@ -5,7 +5,6 @@ conda config --env --add channels defaults
 
 conda install "./enaml-video-app-0.1.0-py_0.tar.bz2"
 conda remove --force --yes pyqtgraph
-conda install --copy --yes pyqtgraph
 pip install git+https://github.com/pyqtgraph/pyqtgraph.git
 pip install pyside2
 
