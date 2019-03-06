@@ -49,6 +49,7 @@ done
 # </miniconda path confirmation>
 
 
+cd "$here/env"
 export PYTHONNOUSERSITE=1
 export PATH="$prefix/$_bin:$prefix/condabin:$PATH"
 

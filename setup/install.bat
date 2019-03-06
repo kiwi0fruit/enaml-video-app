@@ -36,6 +36,7 @@ set "_cnd=%conda%"
 :: </miniconda path confirmation>
 
 
+cd /d "%here%\env"
 set PYTHONNOUSERSITE=1
 set "PATH=%prefix%\Scripts;%prefix%\condabin;%PATH%"
 
