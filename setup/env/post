@@ -1,13 +1,14 @@
 #!/bin/bash
+
 # inverse order of channels:
 conda config --env --add channels conda-forge
 conda config --env --add channels defaults
 
-conda install "./enaml-video-app-0.1.0-py_0.tar.bz2"
-conda remove --force --yes pyqtgraph
-pip install git+https://github.com/pyqtgraph/pyqtgraph.git
-pip install pyside2
 
-# python -m ipykernel install --user --name "$env"
+conda install "./enaml-video-app-0.1.0-py_0.tar.bz2" || exi
+conda remove --force --yes pyqtgraph || exi
+pip install git+https://github.com/pyqtgraph/pyqtgraph.git || exi
+pip install pyside2 || exi
 
 enaml-video-app-ready
+# python -m ipykernel install --user --name "$env"

@@ -1,8 +1,10 @@
 #!/bin/bash
+exi () { read -n 1 -s -r -p "Error occured. Press any key to exit" && exit 1; }
 here="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+
 # <custom vars>
-source "$here/env/pre"
+source "$here/env/pre" || exi
 # </custom vars>
 
 
@@ -49,29 +51,29 @@ done
 # </miniconda path confirmation>
 
 
-cd "$here/env"
+cd "$here/env" || exi
 export PYTHONNOUSERSITE=1
 export PATH="$prefix/$_bin:$prefix/condabin:$PATH"
 
-source "$(type -p activate)" base
+source "$(type -p activate)" base || exi
 
 _cnd=conda
 if [[ "$OSTYPE" == "msys" ]]; then
     _cnd="$(cygpath -w "$(type -p conda.exe)")"; fi
-"$prefix/$_python" "$here/setup/clear_global_channels.py" "$_cnd"
+"$prefix/$_python" "$here/setup/clear_global_channels.py" "$_cnd" || exi
 
-conda remove -n "$env" --all
-conda env remove -n "$env"
-conda update conda
-conda env create --file "$here/env/$yaml"
+conda remove -n "$env" --all || exi
+conda env remove -n "$env" || exi
+conda update conda || exi
+conda env create --file "$here/env/$yaml" || exi
 
-conda deactivate
-source "$(type -p activate)" "$env"
+conda deactivate || exi
+source "$(type -p activate)" "$env" || exi
 
 
 # <custom commands after activate>
-cd "$here/env"
-source "$here/env/post"
+cd "$here/env" || exi
+source "$here/env/post" || exi
 # </custom commands after activate>
 
 conda deactivate

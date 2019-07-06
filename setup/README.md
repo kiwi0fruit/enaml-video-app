@@ -16,24 +16,18 @@
       (open folder with downloaded Miniconda in the terminal before running the command),
     * [macOS install instruction](https://conda.io/docs/user-guide/install/macos.html).
 
-4. Create conda environment with the app (**on Windows**):  
+4. If on **Windows** install [Git Bash](https://git-scm.com/downloads).
+  Install instructions are straight-forward.
 
-    - run `install.bat` in this folder.  
+5. Create conda environment with the app:
 
-      > If on error then the script will close (this shouldn't
-      > happen normally). To debug press `start`, type `cmd`,
-      > press enter - you will launch a command prompt. Then
-      > drag'n'drop `install.bat` script into the cmd window,
-      > press enter.
-
-5. Create conda environment with the app (**on Linux/macOS**):
-
-    - open *this folder* in terminal,
+    - open *this folder* in terminal (if on Windows:
+      right mouse click in the white space of the current folder then "Git Bash Here"),
     - type `. ./install`, enter,  
 
       >  **or**  
 
-    - open terminal,
+    - open terminal (Git Bash if on Windows),
     - type dot (`.`), type space (` `),
     - drag'n'drop `install` script to the terminal, enter  
 
@@ -46,11 +40,15 @@ activated root conda environment. Then type:
     conda remove --name enaml_video_app --all
     conda env remove --name enaml_video_app
 
-Sometimes conda environment is not deleted but renamed and placed to special trash folder inside root Miniconda installation. It's out of action this way but still takes disk space. You may need to delete it via `conda clean --help`. Manually deleting may break your conda installation.
+Sometimes conda environment is not deleted but renamed and placed to special trash
+folder inside root Miniconda installation. It's out of action this way but still takes
+disk space. You may need to delete it via `conda clean --help`. Manually deleting may
+break your conda installation.
 
 
 ## Reinstall
 
-If you need to reinstall the app (this would be with latest packages) simply run installation again: it will delete the appropriate environment first.
+If you need to reinstall the app (this would be with latest packages) simply run
+installation again: it will delete the appropriate environment first.
 
 *Save this folder somewhere in case you would like to reinstall it in future*.
