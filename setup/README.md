@@ -12,9 +12,9 @@
   to the PATH unless you have a reason - the app starts
   nicely via shortcut to be created.
     * on Windows installation is straight-forward,
-    * [Linux install instruction](https://conda.io/docs/user-guide/install/linux.html)
+    * [Linux install instruction](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html)
       (open folder with downloaded Miniconda in the terminal before running the command),
-    * [macOS install instruction](https://conda.io/docs/user-guide/install/macos.html).
+    * [macOS install instruction](https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html).
 
 4. If on **Windows** install [Git Bash](https://git-scm.com/downloads).
   Install instructions are straight-forward.
