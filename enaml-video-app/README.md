@@ -1,5 +1,16 @@
 # Build instructions
 
+### UPD
+
+If on macOS see about [conda build settings](https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#python-app): If `osx_is_app` is set, entry points use `python.app` instead of Python in macOS. The default is `False`.
+
+```yaml
+build:
+  osx_is_app: True
+```
+
+### Build instructions
+
 Start app via `enaml-video-app` executable. `enaml-video-app-ready` CLI creates desktop shortcuts to app executable and to terminal with activated environment via [shortcutter](https://github.com/kiwi0fruit/shortcutter).
 
 First:
